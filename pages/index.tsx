@@ -179,28 +179,19 @@ const DiscountedGamesPage: React.FC = () => {
                     <PaginationContent>
                         <PaginationItem>
                             {currentPage === 1 ? (
-                                <PaginationPrevious onClick={() => {
-                                }} disabled/>
+                                <PaginationPrevious/>
                             ) : (
                                 <PaginationPrevious onClick={() => paginate(currentPage - 1)}/>
                             )}
                         </PaginationItem>
-                        {(() => {
-                            const pageCount = Math.ceil(games.length / gamesPerPage);
-                            const paginationItems = [];
-                            for (let i = 0; i < pageCount; i++) {
-                                paginationItems.push(
-                                    <PaginationItem key={i}>
-                                        <PaginationLink onClick={() => paginate(i + 1)}>{i + 1}</PaginationLink>
-                                    </PaginationItem>
-                                );
-                            }
-                            return paginationItems;
-                        })()}
+                        {Array.from({length: Math.ceil(games.length / gamesPerPage)}).map((_, index) => (
+                            <PaginationItem key={index}>
+                                <PaginationLink onClick={() => paginate(index + 1)}>{index + 1}</PaginationLink>
+                            </PaginationItem>
+                        ))}
                         <PaginationItem>
                             <PaginationNext
                                 onClick={() => paginate(currentPage + 1)}
-                                disabled={currentPage === Math.ceil(games.length / gamesPerPage)}
                                 className={currentPage === Math.ceil(games.length / gamesPerPage) ? "opacity-50 pointer-events-none" : ""}
                             />
                         </PaginationItem>
