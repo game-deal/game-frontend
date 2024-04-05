@@ -54,7 +54,7 @@ const DiscountedGamesPage: React.FC = () => {
         setFilteredGames(data.slice(0, gamesPerPage));
         setCarouselGames(data.slice(0, 4));
       } catch (error) {
-        toast.error(`Error fetching data: ${error.message}`);
+        toast.error(`Error fetching data`);
       }
     };
 
