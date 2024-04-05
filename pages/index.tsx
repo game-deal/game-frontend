@@ -45,7 +45,7 @@ const DiscountedGamesPage: React.FC = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('https://vercel-cors-drab.vercel.app/https://game-backend-five.vercel.app');
+        const response = await fetch('https://vercel-cors-drab.vercel.app/https://game-deals.azurewebsites.net');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -86,131 +86,142 @@ const DiscountedGamesPage: React.FC = () => {
   const totalDiscountedGames = games.length;
 
   // @ts-ignore
-  return (
-      <div className="container mx-auto px-4 py-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Game Discounts</h1>
-          <p className="text-gray-500 mt-2 mb-8">Get your favorite games at unbeatable prices!</p>
-        </div>
+  // @ts-ignore
+    return (
+        <div className="container mx-auto px-4 py-6">
+            <div className="text-center">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Game Discounts</h1>
+                <p className="text-gray-500 mt-2 mb-8">Get your favorite games at unbeatable prices!</p>
+            </div>
 
-        <section>
-          <Carousel>
-            <CarouselContent>
-              {carouselGames.map((game, index) => (
-                  <CarouselItem key={index}>
-                    <div className="relative">
-                      <Image
-                          className="aspect-[2/1] rounded"
-                          src={game.image_url}
-                          alt={game.name}
-                          width={1400}
-                          height={600}
-                          quality={100}
-                          loading="lazy" // Lazy loading
-                      />
-                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 text-white">
-                        <h2 className="text-xl font-bold">{game.name}</h2>
-                        <p className="text-sm">{game.description}</p>
-                        <div className="flex justify-between">
-                          <span className="text-lg">{game.new_price}</span>
-                          <span className="text-lg line-through text-white">{game.old_price}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious/>
-            <CarouselNext/>
-          </Carousel>
-        </section>
+            <section>
+                <Carousel>
+                    <CarouselContent>
+                        {carouselGames.map((game, index) => (
+                            <CarouselItem key={index}>
+                                <div className="relative">
+                                    <Image
+                                        className="aspect-[2/1] rounded"
+                                        src={game.image_url}
+                                        alt={game.name}
+                                        width={1400}
+                                        height={600}
+                                        quality={100}
+                                        loading="lazy" // Lazy loading
+                                    />
+                                    <div
+                                        className="absolute bottom-0 left-0 right-0 p-4 bg-black bg-opacity-50 text-white">
+                                        <h2 className="text-xl font-bold">{game.name}</h2>
+                                        <p className="text-sm">{game.description}</p>
+                                        <div className="flex justify-between">
+                                            <span className="text-lg">{game.new_price}</span>
+                                            <span className="text-lg line-through text-white">{game.old_price}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    <CarouselPrevious/>
+                    <CarouselNext/>
+                </Carousel>
+            </section>
 
-        <div className="my-8">
-          <Input
-              type="text"
-              placeholder="Search games"
-              value={searchTerm}
-              onChange={handleSearch}
-              className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-
-        <div className="grid gap-6 sm:gap-4 lg:gap-2 xl:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredGames.map((game, index) => (
-              <Link href={game.discount_url} key={index} legacyBehavior>
-                <a>
-                  <motion.div
-                      whileHover={{scale: 1.05}}
-                      whileTap={{scale: 0.95}}
-                      className="relative overflow-hidden"
-                      style={{height: '100%'}}
-                  >
-                    <Card>
-                      <CardHeader>
-                        <CardTitle>{game.name}</CardTitle>
-                      </CardHeader>
-                      <Image
-                          src={game.image_url}
-                          alt={game.name}
-                          quality={100}
-                          width={100}
-                          height={100}
-                          className="absolute top-0 left-0 w-full h-full object-cover rounded"
-                          loading="lazy" // Lazy loading
-                      />
-                      <CardContent className="relative z-10">
-                        <div className="flex items-baseline gap-2 text-2xl font-semibold">
-                          <span>{game.new_price}</span>
-                          <span className="line-through text-white">{game.old_price}</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                </a>
-              </Link>
-          ))}
-        </div>
-
-        <div className="flex justify-center my-8">
-          <Pagination>
-            <PaginationContent>
-              <PaginationItem>
-                {currentPage === 1 ? (
-                    <PaginationPrevious onClick={() => {
-                    }} disabled/>
-                ) : (
-                    <PaginationPrevious onClick={() => paginate(currentPage - 1)}/>
-                )}
-              </PaginationItem>
-              {Array.from({length: Math.ceil(games.length / gamesPerPage)}).map((_, index) => (
-                  <PaginationItem key={index}>
-                    <PaginationLink onClick={() => paginate(index + 1)}>{index + 1}</PaginationLink>
-                  </PaginationItem>
-              ))}
-              <PaginationItem>
-                <PaginationPrevious
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className={currentPage === 1 ? "opacity-50 pointer-events-none" : ""}
+            <div className="my-8">
+                <Input
+                    type="text"
+                    placeholder="Search games"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
-              </PaginationItem>
-            </PaginationContent>
-          </Pagination>
-        </div>
+            </div>
+
+            <div
+                className="grid gap-6 sm:gap-4 lg:gap-2 xl:gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {filteredGames.map((game, index) => (
+                    <Link href={game.discount_url} key={index} legacyBehavior>
+                        <a>
+                            <motion.div
+                                whileHover={{scale: 1.05}}
+                                whileTap={{scale: 0.95}}
+                                className="relative overflow-hidden"
+                                style={{height: '100%'}}
+                            >
+                                <Card>
+                                    <CardHeader>
+                                        <CardTitle>{game.name}</CardTitle>
+                                    </CardHeader>
+                                    <Image
+                                        src={game.image_url}
+                                        alt={game.name}
+                                        quality={100}
+                                        width={100}
+                                        height={100}
+                                        className="absolute top-0 left-0 w-full h-full object-cover rounded"
+                                        loading="lazy" // Lazy loading
+                                    />
+                                    <CardContent className="relative z-10">
+                                        <div className="flex items-baseline gap-2 text-2xl font-semibold">
+                                            <span>{game.new_price}</span>
+                                            <span className="line-through text-white">{game.old_price}</span>
+                                        </div>
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
+                        </a>
+                    </Link>
+                ))}
+            </div>
+
+            <div className="flex justify-center my-8">
+                <Pagination>
+                    <PaginationContent>
+                        <PaginationItem>
+                            {currentPage === 1 ? (
+                                <PaginationPrevious onClick={() => {
+                                }} disabled/>
+                            ) : (
+                                <PaginationPrevious onClick={() => paginate(currentPage - 1)}/>
+                            )}
+                        </PaginationItem>
+                        {(() => {
+                            const pageCount = Math.ceil(games.length / gamesPerPage);
+                            const paginationItems = [];
+                            for (let i = 0; i < pageCount; i++) {
+                                paginationItems.push(
+                                    <PaginationItem key={i}>
+                                        <PaginationLink onClick={() => paginate(i + 1)}>{i + 1}</PaginationLink>
+                                    </PaginationItem>
+                                );
+                            }
+                            return paginationItems;
+                        })()}
+                        <PaginationItem>
+                            <PaginationNext
+                                onClick={() => paginate(currentPage + 1)}
+                                disabled={currentPage === Math.ceil(games.length / gamesPerPage)}
+                                className={currentPage === Math.ceil(games.length / gamesPerPage) ? "opacity-50 pointer-events-none" : ""}
+                            />
+                        </PaginationItem>
+                    </PaginationContent>
+                </Pagination>
+            </div>
 
 
-        <div className="flex justify-center items-center content-center my-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Total Discounted Games</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription className="justify-center items-center">{totalDiscountedGames}</CardDescription>
-            </CardContent>
-          </Card>
+            <div className="flex justify-center items-center content-center my-8">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Total Discounted Games</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CardDescription
+                            className="justify-center items-center">{totalDiscountedGames}</CardDescription>
+                    </CardContent>
+                </Card>
+            </div>
         </div>
-      </div>
-  );
+    );
 };
 
 export default DiscountedGamesPage;
