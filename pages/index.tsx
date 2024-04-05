@@ -45,7 +45,7 @@ const DiscountedGamesPage: React.FC = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('https://vercel-cors-drab.vercel.app/https://game-deals.azurewebsites.net');
+        const response = await fetch('http://localhost:8080/http://localhost:3001');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
@@ -183,8 +183,9 @@ const DiscountedGamesPage: React.FC = () => {
                   </PaginationItem>
               ))}
               <PaginationItem>
-                <PaginationNext onClick={() => paginate(currentPage + 1)}
-                                disabled={currentPage === Math.ceil(games.length / gamesPerPage)}></PaginationNext>
+                {currentPage > 1 && (
+                    <PaginationPrevious onClick={() => paginate(currentPage - 1)} />
+                )}
               </PaginationItem>
             </PaginationContent>
           </Pagination>
