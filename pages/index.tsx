@@ -45,7 +45,7 @@ const DiscountedGamesPage: React.FC = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('http://localhost:8080/http://localhost:3001');
+        const response = await fetch('https://vercel-cors-drab.vercel.app/https://game-deals.azurewebsites.net');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
