@@ -175,7 +175,11 @@ const DiscountedGamesPage: React.FC = () => {
           <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationPrevious onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}/>
+                {currentPage === 1 ? (
+                    <PaginationPrevious onClick={() => {}} />
+                ) : (
+                    <PaginationPrevious onClick={() => paginate(currentPage - 1)} />
+                )}
               </PaginationItem>
               {[...Array(Math.ceil(games.length / gamesPerPage)).keys()].map((number) => (
                   <PaginationItem key={number}>
@@ -183,10 +187,12 @@ const DiscountedGamesPage: React.FC = () => {
                   </PaginationItem>
               ))}
               <PaginationItem>
-                {currentPage > 1 && (
-                    <PaginationPrevious onClick={() => paginate(currentPage - 1)} />
-                )}
+                <PaginationPrevious
+                    onClick={() => paginate(currentPage - 1)}
+                    className={currentPage === 1 ? "opacity-50 pointer-events-none" : ""}
+                />
               </PaginationItem>
+
             </PaginationContent>
           </Pagination>
         </div>
