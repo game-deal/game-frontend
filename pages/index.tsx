@@ -45,7 +45,7 @@ const DiscountedGamesPage: React.FC = () => {
   useEffect(() => {
     const fetchGames = async () => {
       try {
-        const response = await fetch('https://game-backend-five.vercel.app');
+        const response = await fetch('https://game-backend-roan.vercel.app');
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }
