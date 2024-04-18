@@ -16,9 +16,8 @@ interface ServerStatus {
 export default function Status() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     const servers: Server[] = [
-        { url: 'https://api.streamsora.live', altName: 'Website' },
-        { url: 'https://game-deals.azurewebsites.net', altName: 'Backend' },
-        { url: 'https://vercel-cors-drab.vercel.app', altName: 'Cors' },
+        { url: 'https://game-frontend-black.vercel.app', altName: 'Website' },
+        { url: 'https://game-backend-d6d3750921.onlitegix.com', altName: 'Backend' },
         // Add more servers as needed
     ];
 
